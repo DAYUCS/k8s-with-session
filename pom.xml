@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>com.eximbills.cloud</groupId>
-    <artifactId>webprofile-session</artifactId>
+    <artifactId>k8s-with-session</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -25,6 +25,7 @@
         <!-- Plugins -->
         <version.maven-war-plugin>3.2.3</version.maven-war-plugin>
         <version.dockerfile-maven-plugin>1.4.10</version.dockerfile-maven-plugin>
+        <version.exec-maven-plugin>1.6.0</version.exec-maven-plugin>
         <!-- OpenLiberty runtime -->
         <version.openliberty-runtime>RELEASE</version.openliberty-runtime>
         <http.port>9080</http.port>

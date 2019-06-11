@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>net.wasdev.wlp.maven.parent</groupId>
+        <artifactId>liberty-maven-app-parent</artifactId>
+        <version>RELEASE</version>
+    </parent>
+
+    <groupId>com.eximbills.cloud</groupId>
+    <artifactId>webprofile-session</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <hazelcast.version>3.12</hazelcast.version>
+        <!-- Plugins -->
+        <version.maven-war-plugin>3.2.3</version.maven-war-plugin>
+        <version.dockerfile-maven-plugin>1.4.10</version.dockerfile-maven-plugin>
+        <!-- OpenLiberty runtime -->
+        <version.openliberty-runtime>RELEASE</version.openliberty-runtime>
+        <http.port>9080</http.port>
+        <https.port>9443</https.port>
+        <!-- Default test properties -->
+        <cluster.ip>localhost</cluster.ip>
+        <webprofile-session.kube.service>webprofile-session-service</webprofile-session.kube.service>
+        <webprofile-session.node.port>31000</webprofile-session.node.port>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+           <dependency>
+               <groupId>io.openliberty.features</groupId>
+               <artifactId>features-bom</artifactId>
+               <version>19.0.0.5</version>
+               <type>pom</type>
+               <scope>import</scope>
+           </dependency>
+           <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>4.0.1</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.hazelcast</groupId>
+                <artifactId>hazelcast</artifactId>
+                <version>${hazelcast.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.9</version>
+                <scope>compile</scope>
+            </dependency>
+            <!-- Support for JDK 9 and above -->
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>2.4.0-b180830.0359</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>windowsExtension</id>
+            <activation>
+                <os><family>Windows</family></os>
+            </activation>
+            <properties>
+                <kubectl.extension>.cmd</kubectl.extension>
+            </properties>
+        </profile>
+        <profile>
+            <id>nonWindowsExtension</id>
+            <activation>
+                <os><family>!Windows</family></os>
+            </activation>
+            <properties>
+                <kubectl.extension></kubectl.extension>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${version.maven-war-plugin}</version>
+                    <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                        <packagingExcludes>pom.xml</packagingExcludes>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>net.wasdev.wlp.maven.plugins</groupId>
+                    <artifactId>liberty-maven-plugin</artifactId>
+                    <configuration>
+                        <assemblyArtifact>
+                            <groupId>io.openliberty</groupId>
+                            <artifactId>openliberty-runtime</artifactId>
+                            <version>RELEASE</version>
+                            <type>zip</type>
+                        </assemblyArtifact>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>dockerfile-maven-plugin</artifactId>
+                    <version>${version.dockerfile-maven-plugin}</version>
+                    <executions>
+                        <execution>
+                            <id>default</id>
+                            <goals>
+                                <goal>build</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <repository>${project.artifactId}</repository>
+                        <tag>${project.version}</tag>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <modules>
+        <module>webprofile-session</module>
+    </modules>
+
+</project>

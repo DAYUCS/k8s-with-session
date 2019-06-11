@@ -1,0 +1,11 @@
+target/
+.apt_generated/
+.settings/
+.project
+.classpath
+.factorypath
+MANIFEST.MF
+README.html
+.DS_Store
+/bin/
+webprofile-session/.vscode/settings.json

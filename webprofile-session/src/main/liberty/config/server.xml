@@ -1,0 +1,19 @@
+<!-- tag::server[] -->
+<server description="Sample Liberty server">
+
+  <featureManager>
+    <feature>webProfile-8.0</feature>
+    <feature>sessionCache-1.0</feature>
+  </featureManager>
+
+  <applicationManager autoExpand="true" />
+  <quickStartSecurity userName="admin" userPassword="adminpwd"/>
+  <keyStore id="defaultKeyStore" location="key.jks" type="jks" password="mpKeystore"/>
+  <httpEndpoint host="*" httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint"/>
+  <httpSessionCache libraryRef="jCacheVendorLib" uri="file:${shared.config.dir}/hazelcast-config.xml" />
+  <library id="jCacheVendorLib">
+    <file name="${shared.resource.dir}/hazelcast.jar" />
+  </library>
+  <webApplication location="webprofile-session.war" contextRoot="/"/>
+</server>
+<!-- end::server[] -->

@@ -175,11 +175,11 @@
               <version>${hazelcast.version}</version>
               <type>jar</type>
               <overWrite>false</overWrite>
-              <outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources</outputDirectory>
+              <outputDirectory>${project.build.directory}/liberty/wlp/usr/servers/defaultServer</outputDirectory>
               <destFileName>hazelcast.jar</destFileName>
             </artifactItem>
           </artifactItems>
-          <outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/resources</outputDirectory>
+          <outputDirectory>${project.build.directory}/liberty/wlp/usr/servers/defaultServer</outputDirectory>
           <overWriteReleases>false</overWriteReleases>
           <overWriteSnapshots>true</overWriteSnapshots>
         </configuration>
@@ -195,7 +195,7 @@
                 <goal>copy-resources</goal>
               </goals>
               <configuration>
-                <outputDirectory>${project.build.directory}/liberty/wlp/usr/shared/config</outputDirectory>
+                <outputDirectory>${project.build.directory}/liberty/wlp/usr/servers/defaultServer</outputDirectory>
                 <resources>
                   <resource>
                     <directory>${project.basedir}/src/main/liberty/config</directory>

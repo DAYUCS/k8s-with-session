@@ -5,6 +5,7 @@ metadata:
   labels:
     app: webprofile-session
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: webprofile-session

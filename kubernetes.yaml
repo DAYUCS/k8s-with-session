@@ -23,13 +23,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: webprofile-session-service
+  name: webprofile-session-loadbalancer
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: webprofile-session
   ports:
-  - protocol: TCP
-    port: 9080
+  - port: 80
     targetPort: 9080
-    nodePort: 31000

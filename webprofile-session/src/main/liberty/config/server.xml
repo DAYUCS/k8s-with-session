@@ -15,5 +15,6 @@
     <file name="${server.config.dir}/hazelcast.jar" />
   </library>
   <webApplication location="webprofile-session.war" contextRoot="/"/>
+  <logging consoleFormat="json" consoleSource="message,trace,accessLog,ffdc,audit" />
 </server>
 <!-- end::server[] -->

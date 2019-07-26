@@ -19,7 +19,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <hazelcast.version>3.12</hazelcast.version>
+    <hazelcast.version>3.12.1</hazelcast.version>
     <app.name>webprofile-session</app.name>
     <webContext>${app.name}</webContext>
     <!-- tag::ports[] -->
@@ -35,7 +35,7 @@
       <dependency>
         <groupId>io.openliberty.features</groupId>
         <artifactId>features-bom</artifactId>
-        <version>19.0.0.5</version>
+        <version>19.0.0.7</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -62,7 +62,20 @@
       <artifactId>commons-lang3</artifactId>
       <version>3.0</version>
     </dependency>
-  
+
+    <!-- Logger -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>2.0.0-alpha0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>2.0.0-alpha0</version>
+    </dependency>
+
   </dependencies>
 
   <profiles>

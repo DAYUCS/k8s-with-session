@@ -3,6 +3,9 @@ package com.eximbills.cloud;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,10 +15,15 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(urlPatterns="/LoginServlet")
 public class LoginServlet extends HttpServlet {
+    
     private static final long serialVersionUID = 1L;
+
+    private static Logger log = LoggerFactory.getLogger(LoginServlet.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        log.info("Into LoginServlet");
+
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         request.getRequestDispatcher("link.html").include(request, response);
